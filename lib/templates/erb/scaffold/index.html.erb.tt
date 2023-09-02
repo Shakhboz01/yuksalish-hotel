@@ -1,0 +1,42 @@
+<div class="container my-5">
+  <div class="card shadow">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h3 class="card-title font-weight-bold"><%= @model_class_name.pluralize.capitalize %></h3>
+      <%= link_to "Добавить новый", send("new_#{@singular_table_name}_path"), class: "btn btn-primary" %>
+    </div>
+
+    <%= render 'filter_form', url: <%= request.path %>, q: @q %>
+
+    <div class="card-body">
+      <% if @<%= @plural_table_name %>.any? %>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <% attributes.each do |attribute| %>
+                <th><%= sort_link @q, :<%= attribute_name %>, <%= attribute.to_s.humanize %> %></th>
+              <% end %>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @<%= @plural_table_name %>.each do |<%= @singular_table_name %> | %>
+              <tr>
+                <% attributes.each do |attribute| %>
+                  <td><%= <%= @singular_table_name %>[attribute] %></td>
+                <% end %>
+                <td>
+                  <%= clink_to 'посмотреть', <%= @singular_table_name %>, 'fa-search' %>
+                  <%= clink_to 'редактировать', send("edit_#{@singular_table_name}_path", <%= @singular_table_name %>), 'fa-edit' %>
+                  <%= cdlink_to 'удалить', <%= @singular_table_name %> %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @plural_table_name %>
+      <% else %>
+        <p class="text-center"><%= "No #{model_resource_name.pluralize}" %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
