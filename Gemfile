@@ -21,7 +21,9 @@ gem "importmap-rails"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
-
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'bootstrap-sass'
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
@@ -80,5 +82,4 @@ gem "cssbundling-rails", "~> 1.2"
 gem "jsbundling-rails", "~> 1.1"
 
 gem "devise", "~> 4.9"
-
 gem "pundit", "~> 2.3"

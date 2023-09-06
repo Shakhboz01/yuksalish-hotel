@@ -1,42 +1,33 @@
 <div class="container my-5">
   <div class="card shadow">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <h3 class="card-title font-weight-bold"><%= @model_class_name.pluralize.capitalize %></h3>
-      <%= link_to "Добавить новый", send("new_#{@singular_table_name}_path"), class: "btn btn-primary" %>
+      <h3 class="card-title font-weight-bold"><%= plural_table_name.titleize %></h3>
+      <%%= link_to 'Добавить новый', new_<%= singular_route_name %>_path, class: "btn btn-success min-width-btn" %>
     </div>
 
-    <%= render 'filter_form', url: <%= request.path %>, q: @q %>
-
     <div class="card-body">
-      <% if @<%= @plural_table_name %>.any? %>
-        <table class="table table-bordered table-hover">
-          <thead>
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <% attributes.reject(&:password_digest?).each do |attribute| -%>
+              <th><%= attribute.human_name %></th>
+            <% end -%>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
             <tr>
-              <% attributes.each do |attribute| %>
-                <th><%= sort_link @q, :<%= attribute_name %>, <%= attribute.to_s.humanize %> %></th>
-              <% end %>
-              <th></th>
+              <% attributes.reject(&:password_digest?).each do |attribute| -%>
+                <td><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
+              <% end -%>
+              <td><%%= link_to 'Посмотреть', <%= singular_route_name %>_path(<%= model_resource_name %>), 'fa-search' %></td>
+              <td><%%= clink_to 'Редактировать', edit_<%= singular_route_name %>_path(<%= singular_table_name %>), 'fa-edit' %></td>
+              <td><%%= cdlink_to 'удалить', <%= model_resource_name %> %></td>
             </tr>
-          </thead>
-          <tbody>
-            <% @<%= @plural_table_name %>.each do |<%= @singular_table_name %> | %>
-              <tr>
-                <% attributes.each do |attribute| %>
-                  <td><%= <%= @singular_table_name %>[attribute] %></td>
-                <% end %>
-                <td>
-                  <%= clink_to 'посмотреть', <%= @singular_table_name %>, 'fa-search' %>
-                  <%= clink_to 'редактировать', send("edit_#{@singular_table_name}_path", <%= @singular_table_name %>), 'fa-edit' %>
-                  <%= cdlink_to 'удалить', <%= @singular_table_name %> %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <%= paginate @plural_table_name %>
-      <% else %>
-        <p class="text-center"><%= "No #{model_resource_name.pluralize}" %></p>
-      <% end %>
+          <%% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

@@ -2,7 +2,8 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <h1 class="text-center mb-4">Добавить новый</h1>
-      <%= render 'form', <%= singular_table_name %>: @<%= singular_table_name %> %>
+      <%%= render 'form', <%= singular_table_name %>: @<%= singular_table_name %> %>
+      <%%= link_to 'назад', <%= index_helper %>_path, class: "btn btn-light min-width-btn" %>
     </div>
   </div>
 </div>
