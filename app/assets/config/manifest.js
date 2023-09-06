@@ -1,1 +1,1 @@
-  //= link application.js
+//= link application.js
