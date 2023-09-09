@@ -78,8 +78,9 @@ end
 gem "cssbundling-rails", "~> 1.2"
 
 gem "jsbundling-rails", "~> 1.1"
-
+gem 'active_interaction'
 gem "devise", "~> 4.9"
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem "pundit", "~> 2.3"
+gem 'telegram-bot-ruby'

@@ -1,8 +1,9 @@
 class UserPolicy < ApplicationPolicy
-  class Scope < Scope
-    # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+  def access?
+    user_is_admin?
+  end
+
+  def manage?
+    user_is_manager?
   end
 end

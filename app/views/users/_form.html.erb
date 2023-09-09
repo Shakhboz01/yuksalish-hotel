@@ -1,0 +1,37 @@
+<%= form_with(model: @user, method: :post) do |form| %>
+  <% if params[:password_change].present? %>
+    <div class="form-group">
+      <%= form.label :password, 'Пароль' %>
+      <%= form.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password_confirmation, 'Подтверждение пароля' %>
+      <%= form.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <%= form.label :name, 'Имя' %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :allowed_to_use, 'Разрешено использовать эту приложению' %>
+      <%= form.check_box :allowed_to_use, {} %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :daily_payment, 'ежедневный платеж' %>
+      <%= form.number_field :daily_payment, class: 'form form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :role, 'Роль' %>
+      <%= form.select :role, User.roles.keys, {}, class: 'form-control' %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.submit 'Сохранить', class: 'btn btn-primary' %>
+  </div>
+<% end %>

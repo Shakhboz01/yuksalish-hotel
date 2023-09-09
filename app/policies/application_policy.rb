@@ -1,10 +1,9 @@
-# frozen_string_literal: true
-
 class ApplicationPolicy
-  # rails g pundit:policy MODEL --no-test
   attr_reader :user, :record
 
   def initialize(user, record)
+    raise Pundit::NotAuthorizedError, 'You must be logged in' unless user
+
     @user = user
     @record = record
   end
@@ -33,22 +32,38 @@ class ApplicationPolicy
     update?
   end
 
+  def manage?
+    false
+  end
+
   def destroy?
     false
   end
 
   class Scope
+    attr_reader :user, :scope
+
     def initialize(user, scope)
+      raise Pundit::NotAuthorizedError, 'must be logged in' unless user
+
       @user = user
       @scope = scope
     end
 
     def resolve
-      raise NotImplementedError, "You must define #resolve in #{self.class}"
+      scope.all
     end
+  end
 
-    private
+  def user_is_admin?
+    user.админ?
+  end
 
-    attr_reader :user, :scope
+  def user_is_manager?
+    %w[админ менеджер].include?(user.role)
+  end
+
+  def everyone_is_allowed?
+    %w[админ менеджер продавец упаковщик оператор механик резчик колбасник дробильщик приёмщик].include?(user.role)
   end
 end

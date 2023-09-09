@@ -4,4 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   enum role: %i[админ менеджер другой]
+  validates :name, uniqueness: true
+
+  def self.devise_parameter_sanitizer
+    super.tap do |sanitizer|
+      sanitizer.permit(:sign_up, keys: [:name])
+    end
+  end
+
+  def active_for_authentication?
+    super && allowed_to_use?
+  end
 end

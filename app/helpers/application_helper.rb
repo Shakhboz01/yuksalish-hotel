@@ -16,4 +16,8 @@ module ApplicationHelper
     status_class = active ? 'true fa-check' : 'false fa-remove'
     "<i class=\"fa fa-fw active-check-#{status_class}\"></i>".html_safe
   end
+
+  def num_to_usd(price)
+    number_to_currency(price, unit: '')
+  end
 end
