@@ -13,8 +13,9 @@ module ApplicationHelper
   end
 
   def active_check(active)
+    style = active ? 'green' : 'red'
     status_class = active ? 'true fa-check' : 'false fa-remove'
-    "<i class=\"fa fa-fw active-check-#{status_class}\"></i>".html_safe
+    "<i style=\"color: #{style}\" class=\"fa fa-fw active-check-#{status_class}\"></i>".html_safe
   end
 
   def num_to_usd(price)
@@ -48,5 +49,19 @@ module ApplicationHelper
     daily_payment = user.daily_payment
     number_of_active_days = participations.where(user_id: user_id).пришёл.count
     num_to_usd(number_of_active_days * daily_payment)
+  end
+
+  def active_tr(boolean)
+    'table-danger' unless boolean
+  end
+
+  def strf_datetime(datetime, date = false)
+    return if datetime.nil?
+
+    if date
+      datetime.strftime('%Y-%m-%d')
+    else
+      datetime.strftime('%Y-%m-%d %H:%M:%S')
+    end
   end
 end
