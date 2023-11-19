@@ -4,7 +4,7 @@ class Shift < ApplicationRecord
   after_create :send_creation_message
   after_update :send_closed_message, if: :saved_changed_to_closed_at
 
-  scope :unclosed, -> { where.not(id: self.id).where(closed_at: nil) }
+  scope :unclosed, -> { where(closed_at: nil) }
 
   private
 

@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_19_103944) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_19_105900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.integer "number_of_people"
+    t.datetime "finished_at"
+    t.boolean "breakfast_included", default: true
+    t.bigint "home_id", null: false
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["home_id"], name: "index_bookings_on_home_id"
+  end
 
   create_table "homes", force: :cascade do |t|
     t.integer "number"
@@ -59,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_19_103944) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "homes"
   add_foreign_key "participations", "users"
   add_foreign_key "shifts", "users"
 end
