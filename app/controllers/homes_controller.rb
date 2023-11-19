@@ -3,8 +3,8 @@ class HomesController < ApplicationController
 
   # GET /homes or /homes.json
   def index
-    @hotel_homes = Home.hotel
-    @hostel_homes = Home.hostel
+    @hotel_homes = Home.hotel.order(:number)
+    @hostel_homes = Home.hostel.order(:number)
   end
 
   # GET /homes/1 or /homes/1.json

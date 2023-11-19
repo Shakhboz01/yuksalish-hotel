@@ -1,27 +1,10 @@
-<div class="container my-5">
-  <div class="card shadow">
-    <div class="card-header d-flex justify-content-between align-items-center">
-      <h3 class="card-title font-weight-bold">Homes</h3>
-      <%= link_to 'Добавить новый', new_home_path, class: "btn btn-success min-width-btn" %>
+<div class="container">
+  <div class='row'>
+    <div class='col-sm-6'>
+      <%= render 'homes_by_type', homes: @hotel_homes, hotel: true %>
     </div>
-
-    <div class="card-body">
-      <table class="table table-hover table-striped">
-        <thead>
-          <tr>
-                        <th colspan="3"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @homes.each do |home| %>
-            <tr>
-                            <td><%= link_to 'Посмотреть', home_path(home), 'fa-search' %></td>
-              <td><%= clink_to 'Редактировать', edit_home_path(home), 'fa-edit' %></td>
-              <td><%= cdlink_to 'удалить', home %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <div class='col-sm-6'>
+      <%= render 'homes_by_type', homes: @hostel_homes %>
     </div>
   </div>
 </div>

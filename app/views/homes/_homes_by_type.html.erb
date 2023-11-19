@@ -1,0 +1,40 @@
+<div class="card shadow">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <% if defined?(hotel) %>
+      <h1>HOTEL</h1>
+    <% else %>
+      <h1>HOSTEL</h1>
+    <% end %>
+
+  </div>
+  <div class="card-body">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Номер</th>
+          <th>Открыт в</th>
+          <th>Количество гостей</th>
+          <th>Завтрак включон</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% homes.each do |home| %>
+          <tr class="<%= home.active? ? 'table-success' : '' %>">
+            <td><%= home.number %></td>
+            <td><%= strf_datetime home.started_at %></td>
+            <td><%= home.number_of_guests %></td>
+            <td><%= active_check home.breakfast_included %></td>
+            <td>
+              <%= clink_to 'Посмотреть', home, 'fa-search' %>
+              <% if home.active? %>
+                <%= clink_to 'Закрыть комнату', root_path, 'fa-person-walking-luggage' %>
+              <% else %>
+                <%= clink_to 'Открыть комнату', root_path, 'fa-person-shelter' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

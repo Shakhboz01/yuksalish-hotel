@@ -1,9 +1,8 @@
-# app/models/concerns/say_helloable.rb
 module ShiftIsPresent
   extend ActiveSupport::Concern
 
   included do
-    validates :shift_is_present
+    validate :shift_is_present
   end
 
   def shift_is_present
