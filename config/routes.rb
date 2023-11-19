@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :top_ups
   resources :homes do
     get :close, on: :member
   end

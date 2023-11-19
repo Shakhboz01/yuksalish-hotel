@@ -1,0 +1,15 @@
+
+<%= simple_form_for(@top_up) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.association :booking, as: :hidden %>
+    <%= f.input :price, label: 'цена' %>
+    <%= f.input :comment, placeholder: 'Не обязательно' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Оформить' %>
+  </div>
+<% end %>

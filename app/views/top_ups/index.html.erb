@@ -1,0 +1,30 @@
+<div class="container my-5">
+  <div class="card shadow">
+    <div class="card-body">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Имя</th>
+            <th>Цена<br><%= @all_top_ups.sum(:price) %> </th>
+            <th>Оформлено в</th>
+            <th>Номер комнаты</th>
+            <th>Комментарие</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @top_ups.each do |top_up| %>
+            <tr>
+              <td><%= top_up.booking.guest_infos.first.name %></td>
+              <td><%= top_up.price %></td>
+              <td><%= strf_datetime top_up.created_at %></td>
+              <td><%= top_up.booking.home.number %></td>
+              <td><%= top_up.comment %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @top_ups %>
+    </div>
+  </div>
+</div>
