@@ -4,6 +4,11 @@ class GuestInfosController < ApplicationController
   # GET /guest_infos or /guest_infos.json
   def index
     @guest_infos = GuestInfo.all
+    if params[:home_id].present?
+      @guest_infos = Home.find(params[:home_id]).bookings.where(finished_at: nil).last.guest_infos
+    end
+
+    @guest_infos = @guest_infos.page(params[:page]).per(40)
   end
 
   # GET /guest_infos/1 or /guest_infos/1.json
@@ -12,7 +17,7 @@ class GuestInfosController < ApplicationController
 
   # GET /guest_infos/new
   def new
-    @guest_info = GuestInfo.new
+    @guest_info = GuestInfo.new(booking_id: params[:booking_id])
   end
 
   # GET /guest_infos/1/edit
@@ -25,10 +30,14 @@ class GuestInfosController < ApplicationController
 
     respond_to do |format|
       if @guest_info.save
-        format.html { redirect_to guest_info_url(@guest_info), notice: "Guest info was successfully created." }
+        if @guest_info.booking.number_of_people == @guest_info.booking.guest_infos.count
+          format.html { redirect_to homes_url(@guest_info), notice: "Guest info was successfully created." }
+        else
+          format.html { redirect_to new_guest_info_url(booking_id: @guest_info.booking.id), notice: "Guest info was successfully created." }
+        end
         format.json { render :show, status: :created, location: @guest_info }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to request.referrer, notice: @guest_info.errors.messages }
         format.json { render json: @guest_info.errors, status: :unprocessable_entity }
       end
     end
@@ -41,7 +50,7 @@ class GuestInfosController < ApplicationController
         format.html { redirect_to guest_info_url(@guest_info), notice: "Guest info was successfully updated." }
         format.json { render :show, status: :ok, location: @guest_info }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to request.referrer, guest_info: @guest_info }
         format.json { render json: @guest_info.errors, status: :unprocessable_entity }
       end
     end
@@ -58,13 +67,14 @@ class GuestInfosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_guest_info
-      @guest_info = GuestInfo.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def guest_info_params
-      params.require(:guest_info).permit(:booking_id, :name, :phone_number, :age)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_guest_info
+    @guest_info = GuestInfo.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def guest_info_params
+    params.require(:guest_info).permit(:booking_id, :name, :phone_number, :age)
+  end
 end

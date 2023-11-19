@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  resources :homes
+  resources :homes do
+    get :close, on: :member
+  end
   resources :guest_infos
   resources :bookings
-  resources :shifts
+  resources :shifts do
+    post :toggle, on: :collection
+  end
   resources :participations do
     collection do
       post "accept_new_participation", action: :accept_new_participation, as: :accept_new_participation

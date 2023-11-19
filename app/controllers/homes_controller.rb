@@ -1,5 +1,5 @@
 class HomesController < ApplicationController
-  before_action :set_home, only: %i[ show edit update destroy ]
+  before_action :set_home, only: %i[ show edit update destroy close ]
 
   # GET /homes or /homes.json
   def index
@@ -56,6 +56,11 @@ class HomesController < ApplicationController
       format.html { redirect_to homes_url, notice: "Home was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def close
+    @home.bookings.where(finished_at: nil).last.update(finished_at: DateTime.current)
+    redirect_to request.referrer, notice: "Комнато теперь закрыто"
   end
 
   private

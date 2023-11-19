@@ -27,9 +27,10 @@
             <td>
               <%= clink_to 'Посмотреть', home, 'fa-search' %>
               <% if home.active? %>
-                <%= clink_to 'Закрыть комнату', root_path, 'fa-person-walking-luggage' %>
+                <%= clink_to 'Закрыть комнату', close_home_path(home), 'fa-person-walking-luggage' %>
+                <%= clink_to 'Показать гостей', guest_infos_url(home_id: home.id), 'fa-user-tie' %>
               <% else %>
-                <%= clink_to 'Открыть комнату', root_path, 'fa-person-shelter' %>
+                <%= clink_to 'Открыть комнату', new_booking_path(home_id: home.id), 'fa-person-shelter' %>
               <% end %>
             </td>
           </tr>

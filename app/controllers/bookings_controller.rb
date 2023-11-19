@@ -12,7 +12,7 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
-    @booking = Booking.new
+    @booking = Booking.new(home_id: params[:home_id])
   end
 
   # GET /bookings/1/edit
@@ -25,10 +25,11 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.save
-        format.html { redirect_to booking_url(@booking), notice: "Booking was successfully created." }
+        format.html { redirect_to new_guest_info_url(booking_id: @booking.id), notice: "Введите данные гостей." }
         format.json { render :show, status: :created, location: @booking }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        booking = @booking
+        format.html { redirect_to request.referrer, notice: @booking.errors.messages }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end
@@ -58,13 +59,14 @@ class BookingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_booking
-      @booking = Booking.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def booking_params
-      params.require(:booking).permit(:number_of_people, :finished_at, :breakfast_included, :home_id, :country)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_booking
+    @booking = Booking.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def booking_params
+    params.require(:booking).permit(:number_of_people, :finished_at, :breakfast_included, :home_id, :country)
+  end
 end

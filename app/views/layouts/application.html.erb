@@ -31,6 +31,11 @@
     <% if user_signed_in? %>
       <%= render 'layouts/navigation' %>
     <% end %>
+    <% flash.each do |msg| %>
+      <div class="alert alert-info">
+        <%= msg %>
+      </div>
+    <% end %>
     <p id='notice'></p>
     <%= yield %>
   </body>

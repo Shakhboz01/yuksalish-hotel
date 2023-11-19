@@ -1,10 +1,24 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @home %>
+<table class='table shadow'>
+  <thead>
+    <tr>
+      <th>Номер</th>
+      <th>Количество людей</th>
+      <th>цена</th>
+      <th>Комната в</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @home.number %></td>
+      <td><%= @home.number_of_people %></td>
+      <td><%= @home.price %></td>
+      <td><%= @home.home_type %></td>
+    </tr>
+  </tbody>
+</table>
 
 <div>
-  <%= link_to "Edit this home", edit_home_path(@home) %> |
-  <%= link_to "Back to homes", homes_path %>
-
-  <%= button_to "Destroy this home", @home, method: :delete %>
+  <%= link_to 'Назад', homes_path %>
 </div>

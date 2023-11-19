@@ -1,10 +1,11 @@
 class Booking < ApplicationRecord
   include ShiftIsPresent
   belongs_to :home
-  validates_presence_of :number_of_people
   validates_presence_of :country
+  validates :number_of_people, comparison: { greater_than: 0 }
+  has_many :guest_infos
   after_create :notify_tg
-  before_update :notify_tg_on_finish, if: :saved_changed_to_finished_at
+  before_update :notify_tg_on_finish, if: :saved_change_to_finished_at
 
   private
 

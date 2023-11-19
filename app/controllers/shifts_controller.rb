@@ -61,6 +61,16 @@ class ShiftsController < ApplicationController
     end
   end
 
+  def toggle
+    if (shift = Shift.unclosed.last).nil? && shift&.user_id == current_user.id
+      shift.update(closed_at: DateTime.current)
+    else
+      Shift.create(user: current_user)
+    end
+
+    redirect_to request.referrer
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
