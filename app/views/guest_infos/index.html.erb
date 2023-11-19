@@ -1,0 +1,35 @@
+<div class="container my-5">
+  <div class="card shadow">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h3 class="card-title font-weight-bold">Guest Infos</h3>
+      <%= link_to 'Добавить новый', new_guest_info_path, class: "btn btn-success min-width-btn" %>
+    </div>
+
+    <div class="card-body">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+                          <th>Booking</th>
+                          <th>Name</th>
+                          <th>Phone number</th>
+                          <th>Age</th>
+                        <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @guest_infos.each do |guest_info| %>
+            <tr>
+                              <td><%= guest_info.booking_id %></td>
+                              <td><%= guest_info.name %></td>
+                              <td><%= guest_info.phone_number %></td>
+                              <td><%= guest_info.age %></td>
+                            <td><%= link_to 'Посмотреть', guest_info_path(guest_info), 'fa-search' %></td>
+              <td><%= clink_to 'Редактировать', edit_guest_info_path(guest_info), 'fa-edit' %></td>
+              <td><%= cdlink_to 'удалить', guest_info %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

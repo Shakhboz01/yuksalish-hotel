@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :guest_infos
   resources :bookings
   resources :shifts
   resources :participations do
