@@ -5,7 +5,7 @@
         <thead>
           <tr>
             <th>Имя</th>
-            <th>Цена<br><%= @all_top_ups.sum(:price) %> </th>
+            <th>Цена<br><%= num_to_usd @all_top_ups.sum(:price) %> </th>
             <th>Оформлено в</th>
             <th>Номер комнаты</th>
             <th>Комментарие</th>
@@ -16,7 +16,7 @@
           <% @top_ups.each do |top_up| %>
             <tr>
               <td><%= top_up.booking.guest_infos.first.name %></td>
-              <td><%= top_up.price %></td>
+              <td><%= num_to_usd top_up.price %></td>
               <td><%= strf_datetime top_up.created_at %></td>
               <td><%= top_up.booking.home.number %></td>
               <td><%= top_up.comment %></td>

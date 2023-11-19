@@ -1,42 +1,24 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <%= link_to 'YUKSALISH Hostel', root_path, class:'navbar-brand' %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <% message = Shift.unclosed.exists? ? 'Закрыть смену' : 'Открыть смену' %>
-        <%= link_to message, toggle_shifts_path, class: 'nav-link', method: :post %>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Работники
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= link_to 'Работники', users_path, class: 'dropdown-item' %>
-          <%= link_to 'переклички', participations_path, class: 'dropdown-item' %>
-          <%= link_to 'добавить новую перекличку', new_participation_path, class: 'dropdown-item' %>
-        </div>
-      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Прочие
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <%= link_to "" %>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <%= link_to "Расходы", expenditures_url, class: 'dropdown-item' %>
+          <%= link_to "Приходы", top_ups_url, class: 'dropdown-item' %>
+          <%= link_to "Список всех гостей", guest_infos_url, class: 'dropdown-item' %>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <% message = Shift.unclosed.exists? ? 'Закрыть смену' : 'Открыть смену' %>
+        <%= link_to message, toggle_shifts_path, class: 'nav-link', method: :post %>
       </li>
     </ul>
   </div>
