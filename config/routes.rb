@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
+  resources :homes
   resources :guest_infos
   resources :bookings
   resources :shifts
   resources :participations do
     collection do
-      post 'accept_new_participation', action: :accept_new_participation, as: :accept_new_participation
+      post "accept_new_participation", action: :accept_new_participation, as: :accept_new_participation
     end
   end
-  root "pages#main_page"
-  devise_for :users, controllers: { sessions: 'sessions' }
+  root "homes#index"
+  devise_for :users, controllers: { sessions: "sessions" }
 
   resources :users, except: %i[update] do
     post :update, on: :member
