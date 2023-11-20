@@ -26,7 +26,7 @@ class ExpendituresController < ApplicationController
     @expenditure.user_id = current_user.id
     respond_to do |format|
       if @expenditure.save
-        format.html { redirect_to expenditure_url(@expenditure), notice: "Expenditure was successfully created." }
+        format.html { redirect_to expenditures_url, notice: "Expenditure was successfully created." }
         format.json { render :show, status: :created, location: @expenditure }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class ExpendituresController < ApplicationController
   def update
     respond_to do |format|
       if @expenditure.update(expenditure_params)
-        format.html { redirect_to expenditure_url(@expenditure), notice: "Expenditure was successfully updated." }
+        format.html { redirect_to expenditures_url, notice: "Expenditure was successfully updated." }
         format.json { render :show, status: :ok, location: @expenditure }
       else
         format.html { render :edit, status: :unprocessable_entity }

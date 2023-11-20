@@ -7,9 +7,13 @@ class SendMessage < ActiveInteraction::Base
     token = ENV["TELEGRAM_TOKEN"]
     bot = Telegram::Bot::Client.new(token)
     begin
-      bot.api.send_message(chat_id: ENV["TELEGRAM_CHAT_ID"], text: message)
+      bot.api.send_message(
+        chat_id: ENV["TELEGRAM_CHAT_ID"],
+        text: message,
+        parse_mode: "HTML",
+      )
     rescue => exception
-      Rails.logger.warn "telegram error"
+      puts "error ------------------------------------------------------------------------------ #{exception}"
     end
   end
 end

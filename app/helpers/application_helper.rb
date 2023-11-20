@@ -63,7 +63,7 @@ module ApplicationHelper
     if date
       datetime.strftime("%Y-%m-%d")
     else
-      datetime.strftime("%Y-%m-%d %H:%M:%S")
+      datetime.strftime("%Y-%m-%d %H:%M")
     end
   end
 end

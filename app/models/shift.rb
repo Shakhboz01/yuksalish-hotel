@@ -1,8 +1,8 @@
 class Shift < ApplicationRecord
   belongs_to :user
   before_create :check_unclosed_shifts
+  before_update :send_closed_message
   after_create :send_creation_message
-  before_update :send_closed_message, if: :saved_changed_to_closed_at
 
   scope :unclosed, -> { where(closed_at: nil) }
 
@@ -16,7 +16,7 @@ class Shift < ApplicationRecord
   end
 
   def send_creation_message
-    SendMessage.run(message: "<h3>Смена открыт</h3>\n")
+    SendMessage.run!(message: "<b>СМЕНА ОТКРЫТ</b>\n")
   end
 
   def send_closed_message
@@ -24,8 +24,11 @@ class Shift < ApplicationRecord
     incomes = TopUp.where("created_at > ?", created_at).sum(:price)
     self.total_expenditure = expenditures
     self.total_income = incomes
-    SendMessage.run(message: "<h3>Смена закрыт</h3>\n" \
-                             "Итого приход: 0 сум \n" \
-                             "Итого расход: 0 сум")
+    self.closed_at = DateTime.current
+    SendMessage.run!(message: "<b>Смена закрыт</b>\n" \
+                     "Открылся в: #{created_at.strftime("%Y-%m-%d %H:%M")}\n" \
+                     "Закрылся в: #{closed_at.strftime("%Y-%m-%d %H:%M")}\n" \
+                     "Итого приход: #{incomes} сум\n" \
+                     "Итого расход: #{total_expenditure} сум")
   end
 end
