@@ -1,10 +1,23 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @shift %>
-
 <div>
-  <%= link_to "Edit this shift", edit_shift_path(@shift) %> |
-  <%= link_to "Back to shifts", shifts_path %>
-
-  <%= button_to "Destroy this shift", @shift, method: :delete %>
+  <h4>Смена №<%= @shift.id %></h4><br>
+  <table class='table table-bordered'>
+    <thead>
+      <tr>
+        <th>Смену открыл: <%= @shift.user.name %></th>
+        <th>Смена открыт в: <%= strf_datetime @shift.created_at %></th>
+        <th>Смена закрылся в: <%= strf_datetime(@shift.closed_at) || 'Смена не закрылся!' %></th>
+        <th>Итого приход: <%= num_to_usd @shift.total_income || @shift.calculate_total_expenditure %></th>
+        <th>Итого расход: <%= num_to_usd @shift.total_expenditure || @shift.total_top_up %></th>
+      </tr>
+  </table>
+  <br>
+  <div class='row'>
+    <div class='col-sm-12'>
+      <%= render 'top_ups/top_ups', top_ups: @shift.list_top_ups, total_price: @shift.total_top_up %>
+      <br><br><br>
+    </div>
+    <div class='col-sm-12'>
+      <%= render 'expenditures/expenditures', expenditures: @shift.list_expenditures, total_price: @shift.total_expenditure %>
+    </div>
+  </div>
 </div>
