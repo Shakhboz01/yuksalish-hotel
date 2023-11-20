@@ -30,7 +30,7 @@ class GuestInfosController < ApplicationController
 
     respond_to do |format|
       if @guest_info.save
-        if @guest_info.booking.number_of_people == @guest_info.booking.guest_infos.count
+        if @guest_info.booking.number_of_people <= @guest_info.booking.guest_infos.count
           format.html { redirect_to homes_url(@guest_info), notice: "Guest info was successfully created." }
         else
           format.html { redirect_to new_guest_info_url(booking_id: @guest_info.booking.id), notice: "Guest info was successfully created." }

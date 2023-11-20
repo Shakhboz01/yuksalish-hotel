@@ -11,7 +11,7 @@ class Home < ApplicationRecord
   end
 
   def number_of_guests
-    self.bookings.where(finished_at: nil).last&.number_of_people
+    self.bookings.where(finished_at: nil).last&.guest_infos&.count
   end
 
   def breakfast_included

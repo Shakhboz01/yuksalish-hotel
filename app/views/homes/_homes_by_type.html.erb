@@ -32,7 +32,8 @@
                 <%= clink_to 'Закрыть комнату', close_home_path(home), 'fa-person-walking-luggage' %> |
                 <%= clink_to 'Показать гостей', guest_infos_url(home_id: home.id), 'fa-user-tie' %> |
                 <%= clink_to 'Оформить оплату', new_top_up_url(home_id: home.id), 'fa-hand-holding-dollar' %> |
-                <%= clink_to 'Показать историю оплат', top_ups_url(home_id: home.id), 'fa-magnifying-glass-dollar' %>
+                <%= clink_to 'Показать историю оплат', top_ups_url(home_id: home.id), 'fa-magnifying-glass-dollar' %> |
+                <%= clink_to 'Добавить гость', new_guest_info_url(booking_id: home.bookings.where(finished_at: nil).last.id), 'fa-user-plus' %>
               <% else %>
                 <%= clink_to 'Открыть комнату', new_booking_path(home_id: home.id), 'fa-person-shelter' %>
               <% end %>
