@@ -72,6 +72,6 @@ class TopUpsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def top_up_params
-    params.require(:top_up).permit(:booking_id, :price, :comment)
+    params.require(:top_up).permit(:booking_id, :price, :comment, :created_at)
   end
 end
