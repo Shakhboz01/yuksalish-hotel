@@ -24,6 +24,7 @@
               <td><%= num_to_usd shift.total_income %></td>
               <td><%= num_to_usd shift.total_expenditure %></td>
               <td><%= strf_datetime shift.closed_at %></td>
+              <td><%= link_to 'посмотреть', shift_path(shift) %></td>
             </tr>
           <% end %>
         </tbody>

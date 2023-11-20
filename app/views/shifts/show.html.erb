@@ -6,8 +6,8 @@
         <th>Смену открыл: <%= @shift.user.name %></th>
         <th>Смена открыт в: <%= strf_datetime @shift.created_at %></th>
         <th>Смена закрылся в: <%= strf_datetime(@shift.closed_at) || 'Смена не закрылся!' %></th>
-        <th>Итого приход: <%= num_to_usd @shift.total_income || @shift.calculate_total_expenditure %></th>
-        <th>Итого расход: <%= num_to_usd @shift.total_expenditure || @shift.total_top_up %></th>
+        <th>Итого приход: <%= num_to_usd @shift.total_income || @shift.total_top_up %></th>
+        <th>Итого расход: <%= num_to_usd @shift.total_expenditure || @shift.calculate_total_expenditure %></th>
       </tr>
   </table>
   <br>

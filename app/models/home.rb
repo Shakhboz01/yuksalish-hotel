@@ -6,6 +6,10 @@ class Home < ApplicationRecord
     self.bookings.where(finished_at: nil).last&.created_at
   end
 
+  def total_paid_by_guests
+    self.bookings.where(finished_at: nil).last&.top_ups&.sum(:price)
+  end
+
   def number_of_guests
     self.bookings.where(finished_at: nil).last&.number_of_people
   end

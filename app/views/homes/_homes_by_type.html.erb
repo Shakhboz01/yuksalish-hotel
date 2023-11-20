@@ -15,6 +15,7 @@
           <th>Открыт в</th>
           <th>Кол. гостей</th>
           <th>Завтрак включон</th>
+          <th>Оплата от гостей</th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +25,7 @@
             <td><%= strf_datetime home.started_at %></td>
             <td><%= home.number_of_guests %></td>
             <td><%= active_check home.breakfast_included %></td>
+            <td><%= num_to_usd home.total_paid_by_guests %></td>
             <td colspan="5">
               <%= clink_to 'Посмотреть', home, 'fa-search' %> |
               <% if home.active? %>
