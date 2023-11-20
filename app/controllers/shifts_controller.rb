@@ -64,6 +64,7 @@ class ShiftsController < ApplicationController
   def toggle
     if !(shift = Shift.unclosed.last).nil? && shift&.user_id == current_user.id
       shift.update!(closed_at: DateTime.current)
+      sign_out current_user
     elsif Shift.unclosed.last.nil?
       Shift.create(user: current_user)
     end
