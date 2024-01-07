@@ -5,6 +5,7 @@
 
   <div class="form-inputs">
     <%= f.association :booking, as: :hidden %>
+    <%= f.association :guest_info, label: 'Выберите гостя', collection: @guest_infos %>
     <%= f.input :price, label: 'цена' %>
     <%= f.input :comment, placeholder: 'Не обязательно' %>
     <%= f.input :created_at, label: 'Дата' %>

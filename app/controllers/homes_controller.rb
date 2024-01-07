@@ -9,6 +9,10 @@ class HomesController < ApplicationController
 
   # GET /homes/1 or /homes/1.json
   def show
+    booking = @home.bookings.last
+    @unfinished = booking.finished_at.nil?
+    @guest_infos = booking.guest_infos
+    @top_ups = booking.top_ups
   end
 
   # GET /homes/new

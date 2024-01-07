@@ -13,16 +13,14 @@
   </thead>
   <tbody>
     <% top_ups.each do |top_up| %>
-      <% top_up.booking.guest_infos.each do |guest_info| %>
-        <tr>
-          <td><%= guest_info.name %></td>
-          <td><%= top_up.price.to_f / top_up.booking.guest_infos.count %></td>
-          <td><%= strf_datetime top_up.created_at %></td>
-          <td><%= strf_datetime guest_info.created_at %></td>
-          <td><%= top_up.booking.home.number %></td>
-          <td><%= top_up.comment %></td>
-        </tr>
-      <% end %>
+      <tr>
+        <td><%= top_up.guest_info.name %></td>
+        <td><%= num_to_usd top_up.price %></td>
+        <td><%= strf_datetime top_up.created_at %></td>
+        <td><%= strf_datetime top_up.guest_info.created_at %></td>
+        <td><%= link_to top_up.booking.home.number, home_path(top_up.booking.home) %></td>
+        <td><%= top_up.comment %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>

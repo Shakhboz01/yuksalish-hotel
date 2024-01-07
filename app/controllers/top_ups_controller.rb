@@ -19,6 +19,7 @@ class TopUpsController < ApplicationController
   def new
     booking = Home.find(params[:home_id]).bookings.where(finished_at: nil).last
     @top_up = TopUp.new(booking_id: booking.id)
+    @guest_infos = booking.guest_infos.pluck(:name, :id)
   end
 
   # GET /top_ups/1/edit
@@ -72,6 +73,6 @@ class TopUpsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def top_up_params
-    params.require(:top_up).permit(:booking_id, :price, :comment, :created_at)
+    params.require(:top_up).permit(:guest_info_id, :booking_id, :price, :comment, :created_at)
   end
 end
