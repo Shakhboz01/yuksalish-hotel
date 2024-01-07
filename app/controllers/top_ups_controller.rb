@@ -3,7 +3,8 @@ class TopUpsController < ApplicationController
 
   # GET /top_ups or /top_ups.json
   def index
-    @top_ups = TopUp.all
+    @q = TopUp.ransack(params[:q])
+    @top_ups = @q.result.order(created_at: :desc)
     if params[:home_id].present?
       @top_ups = Home.find(params[:home_id]).bookings.where(finished_at: nil).last.top_ups
     end
@@ -73,6 +74,6 @@ class TopUpsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def top_up_params
-    params.require(:top_up).permit(:guest_info_id, :booking_id, :price, :comment, :created_at)
+    params.require(:top_up).permit(:guest_info_id, :booking_id, :price, :comment, :created_at, :payment_type)
   end
 end
