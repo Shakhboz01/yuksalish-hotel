@@ -3,7 +3,7 @@ class ExpendituresController < ApplicationController
 
   # GET /expenditures or /expenditures.json
   def index
-    @expenditures = Expenditure.page(params[:page]).per(40)
+    @expenditures = Expenditure.order(created_at: :desc).page(params[:page]).per(40)
     @total_price = Expenditure.sum(:price)
   end
 
