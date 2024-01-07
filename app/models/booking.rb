@@ -1,7 +1,6 @@
 class Booking < ApplicationRecord
   include ShiftIsPresent
   belongs_to :home
-  validates_presence_of :country
   validates :number_of_people, comparison: { greater_than: 0 }
   has_many :guest_infos
   has_many :top_ups

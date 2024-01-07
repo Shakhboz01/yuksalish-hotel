@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_19_163235) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_07_132140) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,7 +19,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_19_163235) do
     t.datetime "finished_at"
     t.boolean "breakfast_included", default: true
     t.bigint "home_id", null: false
-    t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["home_id"], name: "index_bookings_on_home_id"
@@ -42,6 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_19_163235) do
     t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "country", default: ""
     t.index ["booking_id"], name: "index_guest_infos_on_booking_id"
   end
 

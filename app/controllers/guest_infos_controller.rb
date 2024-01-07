@@ -75,6 +75,6 @@ class GuestInfosController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def guest_info_params
-    params.require(:guest_info).permit(:booking_id, :name, :phone_number, :age)
+    params.require(:guest_info).permit(:booking_id, :name, :phone_number, :country, :age)
   end
 end
