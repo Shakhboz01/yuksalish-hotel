@@ -1,5 +1,5 @@
 class GuestInfosController < ApplicationController
-  before_action :set_guest_info, only: %i[ show edit update destroy ]
+  before_action :set_guest_info, only: %i[ show edit update destroy toggle_active ]
 
   # GET /guest_infos or /guest_infos.json
   def index
@@ -64,6 +64,11 @@ class GuestInfosController < ApplicationController
       format.html { redirect_to guest_infos_url, notice: "Guest info was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def toggle_active
+    @guest_info.update(avtive_guest: false)
+    redirect_to request.referrer
   end
 
   private

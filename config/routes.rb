@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :homes do
     get :close, on: :member
   end
-  resources :guest_infos
+  resources :guest_infos do
+    post :toggle_active, on: :member
+  end
   resources :bookings
   resources :shifts do
     post :toggle, on: :collection

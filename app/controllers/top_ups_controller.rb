@@ -20,7 +20,7 @@ class TopUpsController < ApplicationController
   def new
     booking = Home.find(params[:home_id]).bookings.where(finished_at: nil).last
     @top_up = TopUp.new(booking_id: booking.id)
-    @guest_infos = booking.guest_infos.pluck(:name, :id)
+    @guest_infos = booking.guest_infos.where(avtive_guest: true).pluck(:name, :id)
   end
 
   # GET /top_ups/1/edit

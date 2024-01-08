@@ -14,11 +14,14 @@
         </thead>
         <tbody>
           <% guest_infos.each do |guest_info| %>
-            <tr>
+            <tr class="<%= !guest_info.avtive_guest ? 'table-danger' : 't' %>">
               <td><%= guest_info.name %></td>
               <td><%= guest_info.phone_number %></td>
               <td><%= guest_info.country %></td>
               <td><%= strf_datetime guest_info.created_at %></td>
+              <% if guest_info.avtive_guest %>
+                <td><%= clink_to 'удалить', toggle_active_guest_info_path(guest_info), 'fa-remove', :post %></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
