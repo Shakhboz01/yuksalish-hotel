@@ -1,7 +1,6 @@
 class Home < ApplicationRecord
   enum home_type: %i[hotel hostel]
   has_many :bookings
-
   def started_at
     self.bookings.where(finished_at: nil).last&.created_at
   end
