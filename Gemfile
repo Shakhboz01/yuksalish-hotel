@@ -4,12 +4,22 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.7.7"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.7", ">= 7.0.7.2"
+gem "rails", "~> 7.0.4", ">= 7.0.4.3"
+gem 'kaminari', '~> 1.2'
+gem "ransack"
+gem "byebug"
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'bootstrap-sass'
+gem 'devise'
+gem 'pundit'
+gem 'simple_form'
+gem "bulma-rails", "~> 0.9.4"
+gem 'active_link_to'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
-gem "figaro"
-gem 'launchy'
+
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 
@@ -42,10 +52,11 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-gem "simple_form"
-gem "ransack"
-gem 'kaminari', '~> 1.2'
-
+gem 'active_interaction'
+gem 'telegram-bot-ruby'
+gem 'figaro'
+gem 'whenever'
+gem 'launchy'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -74,15 +85,3 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
-
-gem "cssbundling-rails", "~> 1.2"
-
-gem "jsbundling-rails", "~> 1.1"
-gem 'active_interaction'
-gem "devise", "~> 4.9"
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem "pundit", "~> 2.3"
-gem 'telegram-bot-ruby'
-gem 'rack-attack'
-gem 'byebug'
