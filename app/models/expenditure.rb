@@ -12,6 +12,7 @@ class Expenditure < ApplicationRecord
       "<b>Расход!</b>\n" \
       "Цена: #{number_to_currency(price)}\n" \
       "Тип оплаты: #{expenditure_type}"
+    message << "Комментарие: #{comment}" unless comment.empty?
     SendMessage.run(message: message)
   end
 end

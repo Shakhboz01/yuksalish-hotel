@@ -17,7 +17,7 @@ class TopUp < ApplicationRecord
      "Тип оплаты: #{payment_type}\n" \
      "Гость: #{guest_info.name}\n"
 
-    message << "Комментарие: #{comment}" unless comment.nil?
+    message << "Комментарие: #{comment}" unless comment.empty?
     SendMessage.run(message: message)
   end
 end
